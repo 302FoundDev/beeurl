@@ -16,8 +16,8 @@ app.get('/', (req, res) => {
   res.send('404 Not Found')
 })
 
-app.use('/api/urls', urlRoutes)
-app.use('/api/users', userRoutes)
+app.use('/api/url', urlRoutes)
+app.use('/api/user', userRoutes)
 app.use('/api/auth', authRoutes)
 
 app.disable('x-powered-by')

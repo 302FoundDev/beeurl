@@ -1,8 +1,0 @@
-### Send GET request to the api
-POST http://localhost:4000/api/users/find
-
-### GET request to recover all movies
-POST http://localhost:4000/api/users/create
-
-### GET request to recover movie by id
-GET http://localhost:1234/movies/tt5034838

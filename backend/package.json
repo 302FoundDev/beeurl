@@ -13,9 +13,11 @@
   "type": "module",
   "dependencies": {
     "bcrypt": "^5.1.1",
+    "crypto": "^1.0.1",
     "dotenv": "^16.4.5",
     "express": "^4.21.0",
     "express-types": "^0.0.4",
+    "nanoid": "^5.0.7",
     "pg": "^8.13.0"
   },
   "devDependencies": {

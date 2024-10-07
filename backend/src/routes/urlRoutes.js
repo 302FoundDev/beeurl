@@ -1,13 +1,9 @@
 import express from 'express'
+import { shortenUrl, redirectToOriginalUrl } from '../controllers/urlController.js'
 
 const router = express.Router()
 
-router.get('/', (req, res) => {
-  res.send('<h2>Fetching URLs</h2>')
-})
-
-router.post('/', (req, res) => {
-  res.send('<h2>Creating shortened URLs</h2>')
-})
+router.post('/shorten', shortenUrl)
+router.get('/:shortCode', redirectToOriginalUrl)
 
 export default router
