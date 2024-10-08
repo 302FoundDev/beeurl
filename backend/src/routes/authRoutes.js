@@ -1,13 +1,9 @@
 import express from 'express'
+import { userData } from '../controllers/authController.js'
 
 const router = express.Router()
 
-router.get('/', (req, res) => {
-  res.send('logging in')
-})
-
-router.post('/', (req, res) => {
-  res.send('logging out')
-})
+router.get('/user-data', userData)
+router.post('/login')
 
 export default router

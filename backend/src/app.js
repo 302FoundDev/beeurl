@@ -3,6 +3,7 @@ import urlRoutes from './routes/urlRoutes.js'
 import userRoutes from './routes/userRoutes.js'
 import authRoutes from './routes/authRoutes.js'
 import { connectDB } from './models/database/database.js'
+import { configDotenv } from 'dotenv'
 
 // Instalar ts-node-dev para que se pueda ejecutar el archivo de forma local
 // para que se puedan probar las rutas

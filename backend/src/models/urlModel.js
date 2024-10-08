@@ -6,13 +6,16 @@ dotenv.config()
 
 class Url {
 
-    static async shortenedUrl() {
+    static async shortenedUrl(originalUrl) {
         try {
-            const query = ''
+            const query = `SELECT * FROM urls WHERE original_url = $1`
+            const result = await pool.query(query, [originalUrl])
+
+            return result.rows[0]
         }
 
         catch (error) {
-            throw new Error(error.message)
+            throw new Error(`Error: ${error.message}`)
         }
     }
 
@@ -22,12 +25,17 @@ class Url {
         const short_url = `${BASE_URL}/${shortCode}`
 
         try {
+            const url = await this.shortenedUrl(originalUrl)
+            if (url) {
+                return { message: 'URL has been shortened for this user' }
+            }
+
             const query = `INSERT INTO urls (original_url, shortened_url) VALUES ($1, $2) RETURNING *`
             const values = [originalUrl, short_url]
 
-            await pool.query(query, values)
+            const result = await pool.query(query, values)
 
-            return { message: 'Url shortened succesfully' }
+            return result ? { message: 'Url shortened succesfully' } : { message: "Url has not been shortened successfull..." }
         }
 
         catch (error) {

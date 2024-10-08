@@ -3,6 +3,16 @@ import pool from './database/database.js'
 import bcrypt from 'bcrypt'
 
 class User {
+  static async userData (email) {
+    try {
+
+    }
+
+    catch (error) {
+      
+    }
+  }
+
   static async userExists (email) {
     
     try {
