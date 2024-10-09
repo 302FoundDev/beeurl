@@ -1,7 +1,7 @@
 import jwt from 'jsonwebtoken'
 
-const authMiddleware = (req, res, next) => {
-  const token = req.header('Autorization').replace('Bearer', '')
+export const authMiddleware = (req, res, next) => {
+  const token = req.headers.authorization ? req.headers.authorization.replace('Bearer ', '') : null
 
   if (!token) return res.status(401).json({ message: 'Access denied, token is required' })
 

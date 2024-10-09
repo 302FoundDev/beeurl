@@ -19,19 +19,14 @@ class Url {
         }
     }
 
-    static async shortUrl(originalUrl) {
+    static async shortUrl(originalUrl, userId) {
         const shortCode = nanoid(7)
         const BASE_URL = process.env.LOCALHOST_BACKEND
         const short_url = `${BASE_URL}/${shortCode}`
 
         try {
-            const url = await this.shortenedUrl(originalUrl)
-            if (url) {
-                return { message: 'URL has been shortened for this user' }
-            }
-
-            const query = `INSERT INTO urls (original_url, shortened_url) VALUES ($1, $2) RETURNING *`
-            const values = [originalUrl, short_url]
+            const query = `INSERT INTO urls (original_url, shortened_url, owner_id) VALUES ($1, $2,  $3)`
+            const values = [originalUrl, short_url, userId]
 
             const result = await pool.query(query, values)
 

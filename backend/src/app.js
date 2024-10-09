@@ -22,7 +22,7 @@ app.use('/api/user', userRoutes)
 app.use('/api/auth', authRoutes)
 
 app.disable('x-powered-by')
-const port = process.env.PORT ?? 4000
+const port = process.env.PORT ?? 5000
 app.listen(port, () => {
   console.log(`server runing on port ${process.env.LOCALHOST_BACKEND}:${port}`)
 })
