@@ -30,7 +30,7 @@ class Url {
 
             const result = await pool.query(query, values)
 
-            return result ? { message: 'Url shortened succesfully' } : { message: "Url has not been shortened successfull..." }
+            return result.rows[0]
         }
 
         catch (error) {

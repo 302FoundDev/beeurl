@@ -14,8 +14,7 @@ export const shortenUrl = async (req, res) => {
         }
 
         const short = await Url.shortUrl(originalUrl, userId)
-
-        return res.status(200).json(short)
+        return res.status(200).json({ message: 'URL has been shorted succesfully', result: short })
     }
 
     catch (error) {

@@ -25,9 +25,7 @@ export const createUser = async (req, res) => {
     }
 
     const user = await User.create(data)
-    if (user) {
-      return res.status(201).json({ message: 'User has been create successfully', result: user })
-    }
+    return res.status(201).json({ message: 'User has been create successfully', result: user })
   } 
 
   catch (error) {
