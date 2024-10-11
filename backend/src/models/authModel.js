@@ -35,7 +35,6 @@ export default class AuthSesion {
       )
 
       return {
-        message: 'Login successfull',
         token,
         user: {
           email: data.email

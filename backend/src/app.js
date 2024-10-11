@@ -3,7 +3,7 @@ import urlRoutes from './routes/urlRoutes.js'
 import userRoutes from './routes/userRoutes.js'
 import authRoutes from './routes/authRoutes.js'
 import { connectDB } from './models/database/database.js'
-import dotenv from "dotenv"
+import dotenv from 'dotenv'
 
 dotenv.config()
 
