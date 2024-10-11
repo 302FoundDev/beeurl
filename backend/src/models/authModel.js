@@ -20,8 +20,6 @@ export default class AuthSesion {
         return false
       }
 
-      console.log('HEllo world')
-
       return user
     } catch (error) {
       throw new Error(error.message)
