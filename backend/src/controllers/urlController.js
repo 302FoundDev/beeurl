@@ -1,39 +1,44 @@
-import Url from "../models/urlModel.js"
-import dotenv from "dotenv"
+import Url from '../models/urlModel.js'
 
-dotenv.config()
-
-export const shortenUrl = async (req, res) => {
+export const shortUrl = async (req, res) => {
     try {
         const { originalUrl } = req.body
-        const userId = req.user.id
-        const url = await Url.shortenedUrl(originalUrl)
+        const id = req.user
+        const url = await Url.existingUrl(originalUrl)
 
-        if (url) {
-            return res.status(402).json({ message: 'URL has been shortened for this user' })
+        if (!originalUrl) {
+            return res.status(400).json({ message: 'Original URL is required' })
         }
 
-        const short = await Url.shortUrl(originalUrl, userId)
-        return res.status(200).json({ message: 'URL has been shorted succesfully', result: short })
+        if (!id) {
+            return res.status(401).json({ message: 'Unauthorized' })
+        }
+
+        if (url) {
+            return res.status(400).json({ message: 'URL has been shortened for this user' })
+        }
+
+        const short = await Url.shortUrl(originalUrl, id)
+        res.status(200).json({ message: 'URL has been shorted succesfully', result: short })
     }
 
     catch (error) {
-        res.status(500).json({ message: 'Error while acortando URL', error: error.message })
+        throw new Error(error.message)
     }
 }
 
-export const redirectToOriginalUrl = async (req, res) => {
+export const redirectShortUrl = async (req, res) => {
     try {
-        const { shortCode } = req.params
-        const shortUrl = `${process.env.LOCALHOST_BACKEND}/${shortCode}`
+        const { shortCode } = req.params.shortCode
+        // const shortUrl = `${process.env.LOCALHOST_BACKEND}/${shortCode}`
 
-        const url = await Url.shortenedUrl(shortUrl)
+        const result = await Url.redirectShortUrl(shortCode)
 
-        if (url) {
-            return res.redirect(url.originalUrl)
+        if (result) {
+            return res.redirect(result.originalUrl)
         }
 
-        res.status(404).json({ message: 'URL not found' })
+        return res.status(404).json({ message: 'URL not found' })
     }
 
     catch (error) {

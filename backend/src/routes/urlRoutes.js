@@ -1,10 +1,10 @@
 import express from 'express'
-import { shortenUrl, redirectToOriginalUrl } from '../controllers/urlController.js'
-import { authMiddleware } from '../middlewares/authMiddleware.js'
+import { shortUrl, redirectShortUrl } from '../controllers/urlController.js'
+import { authenticateJWT } from '../middlewares/authMiddleware.js'
 
 const router = express.Router()
 
-router.post('/shorten', authMiddleware, shortenUrl)
-router.get('/:shortCode', authMiddleware, redirectToOriginalUrl)
+router.post('/shorten', authenticateJWT, shortUrl)
+router.get('/:shortCode', authenticateJWT, redirectShortUrl)
 
 export default router

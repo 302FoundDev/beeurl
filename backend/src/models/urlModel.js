@@ -6,35 +6,43 @@ dotenv.config()
 
 class Url {
 
-    static async shortenedUrl(originalUrl) {
+    static async existingUrl(originalUrl) {
         try {
             const query = `SELECT * FROM urls WHERE original_url = $1`
             const result = await pool.query(query, [originalUrl])
 
             return result.rows[0]
-        }
-
-        catch (error) {
-            throw new Error(`Error: ${error.message}`)
+        } catch (error) {
+            throw new Error(error.message)
         }
     }
 
-    static async shortUrl(originalUrl, userId) {
+    static async shortUrl(originalUrl, id) {
         const shortCode = nanoid(7)
-        const BASE_URL = process.env.LOCALHOST_BACKEND
-        const short_url = `${BASE_URL}/${shortCode}`
+        const BASE_URL = process.env.LOCALHOST_BACKEND ?? 'http://localhost'
+        const PORT = process.env.PORT ?? 4000
+        const short_url = `${BASE_URL}:${PORT}/${shortCode}`
 
         try {
-            const query = `INSERT INTO urls (original_url, shortened_url, owner_id) VALUES ($1, $2,  $3)`
-            const values = [originalUrl, short_url, userId]
+            const query = `INSERT INTO urls (original_url, shortened_url, owner_id) VALUES ($1, $2, $3) RETURNING *`
+            const values = [originalUrl, short_url, id]
 
             const result = await pool.query(query, values)
 
             return result.rows[0]
+        } catch (error) {
+            throw new Error(error.message)
         }
+    }
 
-        catch (error) {
-            throw new Error(`Error at the MODEL: ${error.message}`)
+    static async redirectShortUrl(shortCode) {
+        try {
+            const query = `SELECT original_url FROM urls WHERE shortened_url = $1`
+            const result = await pool.query(query, [shortCode])
+            
+            return result.rows[0]
+        } catch (error) {
+            throw new Error(error.message)
         }
     }
 }
