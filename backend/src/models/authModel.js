@@ -3,22 +3,17 @@ import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
 
 export default class AuthSesion {
-  static async checkCredentials(data) {
+  static async checkCredentials (email, password) {
     try {
       // Search user in the db
       const query = 'SELECT email, password FROM users WHERE email = $1'
-      const result = await pool.query(query, [data.email])
+      const result = await pool.query(query, [email])
 
       const user = result.rows[0]
+      if (!user) return false
 
-      if (!user) {
-        return false
-      }
-
-      const isMatch = await bcrypt.compare(data.password, user.password)
-      if (!isMatch) {
-        return false
-      }
+      const isMatch = await bcrypt.compare(password, user.password)
+      if (!isMatch) return false
 
       return user
     } catch (error) {
@@ -26,26 +21,29 @@ export default class AuthSesion {
     }
   }
 
-  static async login(data) {
+  static async login (email) {
     try {
       const token = jwt.sign(
-        { email: data.email, password: data.password },
+        { email },
         process.env.JWT_SECRET_KEY,
         { expiresIn: '1h' }
       )
 
       return {
         token,
-        user: {
-          email: data.email
-        }
+        email
       }
     } catch (error) {
       throw new Error(error.message)
     }
   }
 
-  static async userData(data) {
+  // TODO
+  static async logout () {
+    return true
+  }
+
+  static async userData (data) {
     try {
       const query = 'SELECT * FROM users WHERE email = $1'
       const result = await pool.query(query, [data.email])

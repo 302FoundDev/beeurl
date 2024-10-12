@@ -7,34 +7,59 @@ export const userData = async (req, res) => {
   try {
     const auth = await AuthSesion.userData(data)
 
-    if (!auth) return res.status(404).json({ message: 'User not found' })
+    if (!auth) return res.status(404).send({ message: 'User not found' })
 
-    res.status(200).json(auth)
+    res.status(200).send(auth)
   } catch (error) {
     throw new Error(error.message)
   }
 }
 
+const validationErrors = (email, password) => {
+  const errors = {}
+
+  // Validate email
+  if (typeof email !== 'string') errors.email = 'Email must be a string'
+  if (email === '') errors.email = 'Email should not be empty'
+
+  // Validate password
+  if (password === '') errors.password = 'Password must be a string'
+  if (typeof password !== 'string') errors.password = 'Password must be a string'
+
+  return errors
+}
+
 export const login = async (req, res) => {
+  const { email, password } = req.body
+
+  const validate = validationErrors(email, password)
+
+  // Convert validateErrors into an array and validate if length is more than 0
+  if (Object.keys(validate).length > 0) return res.status(400).send(validate)
+
   try {
-    const { email, password } = req.body
-    const data = { email, password }
+    const checkCreds = await AuthSesion.checkCredentials(email, password)
+    if (!checkCreds) return res.status(400).send({ message: 'Invalid credentials' })
 
-    // Validate email
-    if (typeof data.email !== 'string') return res.status(400).json({ email: 'Email must be a string' })
-    if (data.email === '') return res.status(400).json({ email: 'Email should not be empty' })
+    const user = await AuthSesion.login(email, password)
+    const { token } = user
 
-    // Validate password
-    if (data.password === '') return res.status(400).json({ email: 'Password should not be empty' })
-    if (typeof data.password !== 'string') return res.status(400).json({ password: 'Password must be a string' })
+    // Save the cookie
+    res.cookie('access_token', token, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === 'production' ?? 'development',
+      sameSite: 'strict',
+      maxAge: 1000 * 60 * 60
+    })
 
-    const checkCreds = await AuthSesion.checkCredentials(data)
-    const user = await AuthSesion.login(data)
-
-    if (!checkCreds) return res.status(401).json({ message: 'Invalid credentials' })
-
-    res.status(200).json({ message: 'Login Successfully', user })
+    res.status(200).send({ message: 'Login successfully' })
   } catch (error) {
-    throw new Error('error', error.message)
+    throw new Error(error.message)
   }
+}
+
+// TODO
+export const logout = async (req, res) => {
+  const out = await AuthSesion.logout()
+  res.status(200).send(out)
 }

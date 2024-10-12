@@ -4,16 +4,13 @@ import userRoutes from './routes/userRoutes.js'
 import authRoutes from './routes/authRoutes.js'
 import { connectDB } from './models/database/database.js'
 import dotenv from 'dotenv'
-
-dotenv.config()
-
-// Instalar ts-node-dev para que se pueda ejecutar el archivo de forma local
-// para que se puedan probar las rutas
-// pnpm install ts-node-dev --save-dev
+import cookieParser from 'cookie-parser'
 
 const app = express()
 connectDB()
-app.use(express.json()) // middleware que transforma el req.body de la petición en un objeto json
+dotenv.config()
+app.use(express.json())
+app.use(cookieParser())
 
 app.get('/', (req, res) => {
   res.send('404 Not Found')
