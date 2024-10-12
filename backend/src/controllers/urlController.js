@@ -1,14 +1,22 @@
 import Url from '../models/urlModel.js'
 
+const urlValidations = async (originalUrl) => {
+  
+}
+
 export const shortUrl = async (req, res) => {
   try {
-    const { originalUrl } = req.body
-    const id = req.user
-    const url = await Url.existingUrl(originalUrl)
-
     // Validations
+    let { originalUrl } = req.body
     if (!originalUrl) return res.status(400).send({ message: 'Original URL is required' })
-    if (!id) return res.status(401).send({ message: 'Unauthorized' })
+
+    const urlPattern = /^(https?:\/\/)/
+    if (!urlPattern.test(originalUrl)) originalUrl = `https://${originalUrl}`
+
+    const id = req.user.id
+    if (!id) return res.status(400).send({ message: 'ID is required' })
+
+    const url = await Url.existingUrl(originalUrl)
     if (url) return res.status(400).send({ message: 'URL has been shortened for this user' })
 
     const short = await Url.shortUrl(originalUrl, id)
@@ -21,12 +29,14 @@ export const shortUrl = async (req, res) => {
 
 export const redirectShortUrl = async (req, res) => {
   try {
-    const { shortCode } = req.params.shortCode
+    const { shortCode } = req.params
 
     const result = await Url.redirectShortUrl(shortCode)
-    if (result) return res.redirect(result.originalUrl)
+    const url = result.original_url
+    if (!url) return res.status(404).send({ message: 'URL not found' })
 
-    res.status(404).send({ message: 'URL not found' })
+    console.log(url)
+    return res.redirect(url)
   } catch (error) {
     throw new Error(error.message)
   }
