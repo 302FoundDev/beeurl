@@ -9,18 +9,18 @@ export const Navbar = () => {
 
   return (
     <nav className="h-16 max-w-screen-xl m-auto">
-      <ul className="flex gap-4 justify-between items-center w-full h-full">
+      <ul className="flex items-center justify-between w-full h-full gap-4">
         <li>
           <a
             href="https://beeurl.vercel.app"
-            className="font-bold text-xl"
+            className="text-xl font-bold"
           >
             BeeURL
           </a>
         </li>
 
-        <div className="flex gap-3 items-center">
-          <li className="px-2 py-1 hover:bg-gray-800 rounded-md cursor-pointer">
+        <div className="flex items-center gap-1 md:gap-3">
+          <li className="px-2 py-1 rounded-md cursor-pointer hover:bg-gray-800">
             <a 
               target="_blank"
               rel="noopener" 
@@ -28,12 +28,12 @@ export const Navbar = () => {
               href="https://github.com/302founddev/beeurl"
             >
               <span>
-                <VscGithub className="h-7 w-5 flex" />
+                <VscGithub className="flex w-5 h-7" />
               </span>
             </a>
           </li>
 
-          <li className="px-2 py-1 hover:bg-gray-800 rounded-md cursor-pointer">
+          <li className="px-2 py-1 rounded-md cursor-pointer hover:bg-gray-800">
             <span>
               <MdLightMode className="w-6 h-5" />
             </span>
@@ -44,16 +44,13 @@ export const Navbar = () => {
           </li>
 
           <li>
-            <button className="border  bg-blue-600 rounded-md px-5 py-1.5 hover:bg-gray-800 border-gray-700 text-sm">
-              <Link
-                to="/dashboard"
-              >
-                <span className="flex items-center gap-1.5">
-                Get Started
-                <FaArrowRight />
-                </span>
-              </Link>
-            </button>
+            <Link
+              className="px-5 py-1 bg-blue-700 hidden md:flex items-center gap-2 rounded hover:bg-gray-800 hover:border-gray-700"
+              to="/dashboard"
+            >
+              Get Started
+              <FaArrowRight />
+            </Link>
           </li>
         </div>
 

@@ -38,11 +38,6 @@ export default class AuthSesion {
     }
   }
 
-  // TODO
-  static async logout () {
-    return true
-  }
-
   static async userData (data) {
     try {
       const query = 'SELECT * FROM users WHERE email = $1'

@@ -1,20 +1,22 @@
 import './App.css'
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
+import { Route, Routes } from 'react-router-dom'
 import { Navbar } from './components/Navbar'
-import { Hero } from './components/Hero'
-import { Login } from './components/Login'
+import { Hero } from './pages/Hero'
+import { Login } from './pages/Login'
+import { Register } from './pages/Register'
+import { Footer } from './components/Footer'
+
 
 const App: React.FC = () => {
   return (
     <main className='max-w-screen'>
-      <Router>
-        <Navbar />
-        <Routes>
-          <Route path='/login' element={<Login />} />
-          <Route path='/' element={<Hero />} />
-          <Route path='/' />
-        </Routes>
-      </Router>
+      <Navbar />
+      <Routes>
+        <Route path='/' element={<Hero />} />
+        <Route path='/signin' element={<Login />} />
+        <Route path='/signup' element={<Register />} />
+      </Routes>
+      <Footer />
     </main>
   )
 }

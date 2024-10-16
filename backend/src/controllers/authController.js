@@ -58,8 +58,8 @@ export const login = async (req, res) => {
   }
 }
 
-// TODO
 export const logout = async (req, res) => {
-  const out = await AuthSesion.logout()
-  res.status(200).send(out)
+  res.clearCookie('access_token')
+  return res.status(200).json({ message: 'Session closed' })
 }
+
