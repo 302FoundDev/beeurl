@@ -21,10 +21,10 @@ export default class AuthSesion {
     }
   }
 
-  static async login (email) {
+  static async login (email, password) {
     try {
       const token = jwt.sign(
-        { email },
+        { email, password },
         process.env.JWT_SECRET_KEY,
         { expiresIn: '1h' }
       )
@@ -38,7 +38,7 @@ export default class AuthSesion {
     }
   }
 
-  static async userData (data) {
+  static async profile (data) {
     try {
       const query = 'SELECT * FROM users WHERE email = $1'
       const result = await pool.query(query, [data.email])

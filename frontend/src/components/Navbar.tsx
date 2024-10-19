@@ -3,9 +3,13 @@ import { VscGithub } from "react-icons/vsc"
 import { MdLightMode } from "react-icons/md"
 import { Search } from "./ui/Search"
 import { Link } from "react-router-dom"
+import { useState } from "react"
 
 
 export const Navbar = () => {
+
+  // TODO
+  const [path, setPath] = useState('')
 
   return (
     <nav className="h-16 max-w-screen-xl m-auto">
@@ -46,7 +50,7 @@ export const Navbar = () => {
           <li>
             <Link
               className="px-5 py-1 bg-blue-700 hidden md:flex items-center gap-2 rounded hover:bg-gray-800 hover:border-gray-700"
-              to="/dashboard"
+              to="/signup"
             >
               Get Started
               <FaArrowRight />

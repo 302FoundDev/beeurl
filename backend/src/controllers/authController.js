@@ -1,20 +1,5 @@
 import AuthSesion from '../models/authModel.js'
 
-export const userData = async (req, res) => {
-  const { name, email } = req.body
-  const data = { name, email }
-
-  try {
-    const auth = await AuthSesion.userData(data)
-
-    if (!auth) return res.status(404).send({ message: 'User not found' })
-
-    res.status(200).send(auth)
-  } catch (error) {
-    throw new Error(error.message)
-  }
-}
-
 const validationErrors = (email, password) => {
   const errors = {}
 
@@ -46,19 +31,30 @@ export const login = async (req, res) => {
 
     // Save the cookie
     res.cookie('access_token', token, {
-      httpOnly: true,
-      secure: process.env.NODE_ENV === 'production' ?? 'development',
+      httpOnly: false,
+      secure: process.env.NODE_ENV === 'development',
       sameSite: 'strict',
       maxAge: 1000 * 60 * 60
     })
 
     res.status(200).send({ message: 'Login successfully' })
   } catch (error) {
-    throw new Error(error.message)
+    console.error('Error during login:', error)
+    res.status(500).send({ message: 'Server error' })
   }
 }
 
+export const profile = async (req, res) => {
+  const token = req.cookies.access_token
+
+  console.log(token)
+}
+
 export const logout = async (req, res) => {
+  const token = req.cookies.access_token
+
+  if (!token) return res.json({ message: 'Session already closed' })
+
   res.clearCookie('access_token')
   return res.status(200).json({ message: 'Session closed' })
 }

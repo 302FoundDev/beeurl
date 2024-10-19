@@ -1,9 +1,10 @@
 import express from 'express'
-import { userData, login, logout } from '../controllers/authController.js'
+import { profile, login, logout } from '../controllers/authController.js'
+import { authenticateJWT } from '../middlewares/authMiddleware.js'
 
 const router = express.Router()
 
-router.get('/user-data', userData)
+router.get('/profile', authenticateJWT, profile)
 router.post('/login', login)
 router.post('logout', logout)
 
