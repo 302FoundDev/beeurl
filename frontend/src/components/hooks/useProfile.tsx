@@ -3,7 +3,9 @@ import { useNavigate } from 'react-router-dom'
 
 interface User {
   name: string,
-  email: string
+  email: string,
+  original_url: string,
+  shortened_url: string
 }
 
 export const useProfile = () => {

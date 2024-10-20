@@ -16,7 +16,8 @@ export const Profile = () => {
             <div>
               <p>Name: {user.name}</p>
               <p>Email: {user.email}</p>
-              <p>shortened url: `{}`</p>
+              <p>Shortened: <span className='font-semibold'>/{user.shortened_url}</span></p>
+              <p>Original URL: <span className='font-semibold'>{user.original_url}</span></p>
             </div>
           )}
         </div>

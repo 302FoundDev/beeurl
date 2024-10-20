@@ -10,14 +10,15 @@ import { Profile } from './dashboard/profile'
 
 const App: React.FC = () => {
   return (
-    <main className='max-w-screen min-h-screen bg-zinc-900'>
+    <main className='max-w-screen min-h-screen'>
+      <div className="absolute top-0 z-[-2] h-screen w-screen bg-black bg-custom-gradient bg-custom-size"></div>
       <Navbar />
       <Routes>
         // Public routes
         <Route path='/' element={<Hero />} />
         <Route path='/signin' element={<Login />} />
         <Route path='/signup' element={<Register />} />
-        <Route path='/profile' element={<Profile />} />
+        <Route path='/dashboard' element={<Profile />} />
         <Route path='*' element={<NotFound />} />
 
         // Private routes

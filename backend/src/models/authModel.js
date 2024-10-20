@@ -42,7 +42,7 @@ export default class AuthSesion {
 
   static async profile (email) {
     try {
-      const query = 'SELECT id,name,email FROM users WHERE email = $1'
+      const query = 'SELECT users.id,users.name,users.email,urls.original_url,urls.shortened_url FROM users INNER JOIN urls ON users.id = urls.owner_id WHERE users.email = $1'
       const result = await pool.query(query, [email])
 
       if (result.rows.length === 0) throw new Error('User not found')
@@ -53,3 +53,4 @@ export default class AuthSesion {
     }
   }
 }
+
