@@ -10,7 +10,9 @@ export default class AuthSesion {
       const result = await pool.query(query, [email])
 
       const user = result.rows[0]
-      if (!user) return false
+      if (!user) {
+        throw new Error('User not found', email, false)
+      }
 
       const isMatch = await bcrypt.compare(password, user.password)
       if (!isMatch) return false

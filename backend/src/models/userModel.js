@@ -5,7 +5,7 @@ import bcrypt from 'bcrypt'
 class User {
   static async userExists(email) {
     try {
-      const query = 'SELECT * FROM users WHERE email = $1'
+      const query = 'SELECT email FROM users WHERE email = $1'
       const result = await pool.query(query, [email])
 
       return result.rows[0]
