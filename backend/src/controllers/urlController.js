@@ -35,7 +35,6 @@ export const redirectShortUrl = async (req, res) => {
     const url = result.original_url
     if (!url) return res.status(404).send({ message: 'URL not found' })
 
-    console.log(url)
     return res.redirect(url)
   } catch (error) {
     throw new Error(error.message)

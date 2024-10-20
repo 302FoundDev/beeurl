@@ -21,7 +21,7 @@ export const Hero = () => {
             href="https://github.com/302founddev/beeurl"
             rel="noopener"
             target="_blank"
-            className="flex items-center m-auto gap-1.5 border border-gray-800 rounded-md px-5 py-1.5 bg-blue-600 hover:bg-gray-800 hover:border-gray-700 text-lg"
+            className="flex items-center m-auto gap-1.5 rounded-md px-5 py-1.5 border border-zinc-800 hover:bg-zinc-800 text-lg"
           >
             <span className="flex items-center gap-2 text-white font-semibold">
               Star on GitHub
@@ -29,8 +29,8 @@ export const Hero = () => {
             </span>
           </a>
           <Link
-              className="px-5 py-1.5 text-lg font-semibold m-auto bg-blue-700 flex md:hidden items-center gap-2 rounded hover:bg-gray-800 hover:border-gray-700"
-              to="/dashboard"
+              className="px-5 py-1.5 text-lg font-semibold m-auto border border-zinc-800 flex items-center gap-2 rounded-md hover:bg-zinc-800 md:hidden"
+              to="/profile"
             >
               Get Started
               <FaArrowRight />

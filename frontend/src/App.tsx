@@ -1,4 +1,3 @@
-import './App.css'
 import { Route, Routes } from 'react-router-dom'
 import { Navbar } from './components/Navbar'
 import { Hero } from './pages/Hero'
@@ -11,7 +10,7 @@ import { Profile } from './dashboard/profile'
 
 const App: React.FC = () => {
   return (
-    <main className='max-w-screen'>
+    <main className='max-w-screen min-h-screen bg-zinc-900'>
       <Navbar />
       <Routes>
         // Public routes

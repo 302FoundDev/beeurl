@@ -1,49 +1,12 @@
 import { useState } from 'react'
 import {Eye, EyeOff} from 'lucide-react'
 import { Button } from '../components/ui/Button'
-import { useNavigate } from 'react-router-dom'
+import { useLogin } from '../components/hooks/useLogin'
 
 export const Login = () => {
-
   const [showPassword, setShowPassword] = useState(false)
-  const [errorMessage, setErrorMessage] = useState(null)
-  const [isLoading, setIsLoading] = useState(false)
-  const navigate = useNavigate()
-
-  const handleSubmit = async (e) => {
-    e.preventDefault()
-
-    const fields = Object.fromEntries(new window.FormData(e.target))
-    const data = { email: fields.email, password: fields.password }
-
-    setIsLoading(!isLoading)
-    setErrorMessage(null)
-    
-    try {
-      const response = await fetch('http://localhost:8000/api/auth/login', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        credentials: 'include',
-        body: JSON.stringify(data)
-      })
-
-      const res = await response.json()
-
-      if (response.ok) {
-        navigate('/profile')
-      } else {
-        console.error('Login error', res.message)
-        setErrorMessage(res.message)
-        setIsLoading(false)
-      }
-
-    } catch (error) {
-      console.error(error)
-      return error
-    }
-  }
+  // Custom hook
+  const { login, errorMessage, isLoading } = useLogin()
 
   return (
     <section className='min-h-min flex items-center justify-center mt-32 px-4 sm:px-6 lg:px-8'>
@@ -58,7 +21,7 @@ export const Login = () => {
         </div>
         
         <form
-          onSubmit={handleSubmit}
+          onSubmit={login}
           className='flex flex-col gap-8'
         >
           <input 
