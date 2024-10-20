@@ -24,7 +24,7 @@ export default class AuthSesion {
   static async login (email, password) {
     try {
       const token = jwt.sign(
-        { email, password },
+        { email },
         process.env.JWT_SECRET_KEY,
         { expiresIn: '1h' }
       )
@@ -38,10 +38,12 @@ export default class AuthSesion {
     }
   }
 
-  static async profile (data) {
+  static async profile (email) {
     try {
       const query = 'SELECT * FROM users WHERE email = $1'
-      const result = await pool.query(query, [data.email])
+      const result = await pool.query(query, [email])
+
+      if (result.rows.length === 0) throw new Error('User not found')
 
       return result.rows[0]
     } catch (error) {

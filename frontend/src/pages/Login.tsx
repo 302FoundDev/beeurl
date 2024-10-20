@@ -32,12 +32,11 @@ export const Login = () => {
       const res = await response.json()
 
       if (response.ok) {
-        console.log( res.message)
         navigate('/profile')
       } else {
         console.error('Login error', res.message)
         setErrorMessage(res.message)
-        setIsLoading(null)
+        setIsLoading(false)
       }
 
     } catch (error) {
@@ -47,7 +46,7 @@ export const Login = () => {
   }
 
   return (
-    <section className='min-h-min flex items-center justify-center mt-24 px-4 sm:px-6 lg:px-8'>
+    <section className='min-h-min flex items-center justify-center mt-32 px-4 sm:px-6 lg:px-8'>
       <div className='max-w-md w-full space-y-8'>
         <div>
           <h2 className='mt-2 text-center text-3xl font-extrabold '>
@@ -67,7 +66,7 @@ export const Login = () => {
             name='remember'
             value='true'
           />
-          <div>
+          <div className='flex flex-col gap-1'>
 
             <div className='relative'>
               <label 

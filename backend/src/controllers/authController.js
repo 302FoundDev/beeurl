@@ -31,7 +31,7 @@ export const login = async (req, res) => {
 
     // Save the cookie
     res.cookie('access_token', token, {
-      httpOnly: false,
+      httpOnly: true,
       secure: process.env.NODE_ENV === 'development',
       sameSite: 'strict',
       maxAge: 1000 * 60 * 60
@@ -45,9 +45,12 @@ export const login = async (req, res) => {
 }
 
 export const profile = async (req, res) => {
-  const token = req.cookies.access_token
+  const { email } = req.user
 
-  console.log(token)
+  if (!req.user) return res.status(401).json({ message: 'User not found' })
+
+  const userProfile = await AuthSesion.profile(email)
+  res.json({ user: userProfile })
 }
 
 export const logout = async (req, res) => {
@@ -58,4 +61,3 @@ export const logout = async (req, res) => {
   res.clearCookie('access_token')
   return res.status(200).json({ message: 'Session closed' })
 }
-
