@@ -1,6 +1,5 @@
 import { FaSquareXTwitter, FaLink } from "react-icons/fa6"
 
-
 export const Footer = () => {
   return (
     <footer className="max-w-screen-xl m-auto flex justify-between absolute bottom-0 right-0 left-0 pb-4 opacity-60">

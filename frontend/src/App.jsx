@@ -6,9 +6,10 @@ import { Register } from './pages/Register'
 import { Footer } from './components/Footer'
 import { NotFound } from './pages/NotFound'
 import { Profile } from './dashboard/profile'
+import { ProtectedRoute } from './middleware/protectedRoutes'
 
 
-const App: React.FC = () => {
+const App = () => {
   return (
     <main className='max-w-screen min-h-screen'>
       <div className="absolute top-0 z-[-2] h-screen w-screen bg-black bg-custom-gradient bg-custom-size"></div>
@@ -18,12 +19,12 @@ const App: React.FC = () => {
         <Route path='/' element={<Hero />} />
         <Route path='/signin' element={<Login />} />
         <Route path='/signup' element={<Register />} />
-        <Route path='/dashboard' element={<Profile />} />
         <Route path='*' element={<NotFound />} />
 
         // Private routes
-        <Route>
-          <Route></Route>
+        <Route element={<ProtectedRoute />}>
+          <Route path='/dashboard' element={<Profile />} />
+          <Route />
         </Route>
       </Routes>
       <Footer />

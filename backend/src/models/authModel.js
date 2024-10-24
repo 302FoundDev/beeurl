@@ -40,6 +40,19 @@ export default class AuthSesion {
     }
   }
 
+  static async verifyToken(id) {
+    try {
+      const query = 'SELECT * FROM users WHERE id = $1'
+      const result = await pool.query(query, [id])
+
+      if (result.rows.length === 0) throw new Error('User id not found')
+
+      return result.rows[0]
+    } catch (error) {
+      throw new Error(error.message)
+    }
+  }
+
   static async profile (email) {
     try {
       const query = 'SELECT users.id,users.name,users.email,urls.original_url,urls.shortened_url FROM users INNER JOIN urls ON users.id = urls.owner_id WHERE users.email = $1'
@@ -47,10 +60,19 @@ export default class AuthSesion {
 
       if (result.rows.length === 0) throw new Error('User not found')
 
-      return result.rows[0]
+      return {
+        user: {
+          id: result.rows[0].id,
+          name: result.rows[0].name,
+          email: result.rows[0].email
+        },
+        urls: result.rows.map(row => ({
+          original_url: row.original_url,
+          shortened_url: row.shortened_url
+        }))
+      }
     } catch (error) {
       throw new Error(error.message)
     }
   }
 }
-

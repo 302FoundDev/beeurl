@@ -1,11 +1,10 @@
 import jwt from 'jsonwebtoken'
 
 export const authenticateJWT = (req, res, next) => {
-  const authHeader = req.cookies.access_token
-  if (!authHeader) return res.status(401).json({ message: 'Access denied. Token not provided' })
+  const token = req.cookies.access_token
+  if (!token) return res.status(401).json({ message: 'Access denied. Token not provided' })
 
 
-  const token = `${authHeader}`
   if (token == null) return res.status(401)
   if (!token) {
     return res.status(401).json({ message: 'Access denied. Token is invalid' })

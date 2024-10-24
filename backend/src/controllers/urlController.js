@@ -1,9 +1,5 @@
 import Url from '../models/urlModel.js'
 
-const urlValidations = async (originalUrl) => {
-  
-}
-
 export const shortUrl = async (req, res) => {
   try {
     // Validations

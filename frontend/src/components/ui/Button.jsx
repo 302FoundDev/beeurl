@@ -1,18 +1,10 @@
-import { ReactNode } from "react"
-
-interface ButtonProps {
-  children: ReactNode
-  variant?: 'primary' | 'secondary' | 'danger' | 'outlined',
-  size?: 'sm' | 'md' | 'lg' | 'xl'
-}
-
 export const Button = ({ 
     children, 
     variant = 'primary', 
-    size = 'md' }: ButtonProps) => {
+    size = 'md' }) => {
 
   // Base styles
-  const baseStyles = "px-5 py-1 w-full m-auto rounded"
+  const baseStyles = "px-5 py-1 w-full m-auto rounded";
 
   // Variant styles
   const variants = {

@@ -14,7 +14,7 @@ class User {
     }
   }
 
-  static async create(email, password, name) {
+  static async create(name, email, password) {
     try {
       // Hashed password
       const hashedPassword = await bcrypt.hash(password, 10)

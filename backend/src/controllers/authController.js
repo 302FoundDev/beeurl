@@ -1,3 +1,4 @@
+import jwt from 'jsonwebtoken'
 import AuthSesion from '../models/authModel.js'
 
 const validationErrors = (email, password) => {
@@ -44,13 +45,47 @@ export const login = async (req, res) => {
   }
 }
 
+export const verifyToken = async (req, res) => {
+  const { access_token } = req.cookies.access_token
+  const JWT_SECRET_KEY = process.env.JWT_SECRET_KEY
+
+  if (access_token === null) return res.status(401)
+  if (!access_token) return res.status(401).json({ message: 'Unauthorized' })
+
+  jwt.verify(access_token, JWT_SECRET_KEY, async (err, user) => {
+    if (err) {
+      console.error('Token verification error: ', err)
+      return res.status(401).json({ message: 'Unathorized' })
+    }
+
+    console.log('Decoded User: ', user)
+
+    if (!user && !user.id) return res.status(401).json({ message: 'Unathorized: No user id in token' })
+
+    try {
+      const userFound = await AuthSesion.verifyToken(user.id)
+      if (!userFound) return res.status(401).json({ message: 'Unauthorized' })
+
+      return res.json({
+        id: userFound.id,
+        name: userFound.name,
+        email: userFound.email
+      })
+
+    } catch (error) { 
+      console.error('Error finding user: ', error)
+      return res.status(500).json({ message: 'Internal server error' })
+    }
+  })
+}
+
 export const profile = async (req, res) => {
   const { email } = req.user
 
   if (!req.user) return res.status(401).json({ message: 'User not found' })
 
   const userProfile = await AuthSesion.profile(email)
-  res.json({ user: userProfile })
+  return res.json({ user: userProfile })
 }
 
 export const logout = async (req, res) => {

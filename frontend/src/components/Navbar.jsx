@@ -3,13 +3,16 @@ import { VscGithub } from "react-icons/vsc"
 import { MdLightMode } from "react-icons/md"
 import { Search } from "./ui/Search"
 import { Link } from "react-router-dom"
+import { useAuth } from "../context/AuthContext"
 
 
 export const Navbar = () => {
 
+  const { user, isAuthenticated } = useAuth()
+
   return (
     <nav className="max-w-screen m-auto border-b-2 border-zinc-800 bg-zinc-900">
-      <div className="max-w-screen-xl m-auto h-20">
+      <div className="max-w-screen-xl m-auto h-16">
         <ul className="flex items-center justify-between w-full h-full gap-4">
           <li>
             <Link
@@ -45,13 +48,19 @@ export const Navbar = () => {
             </li>
 
             <li>
-              <Link
-                className="px-5 py-1 border border-zinc-800 hover:bg-zinc-800 bg-transparent hidden items-center gap-2 rounded-md md:flex"
-                to="/signup"
-              >
-                Get Started
-                <FaArrowRight />
-              </Link>
+              {
+                isAuthenticated && user ? (
+                  <Link to='/dashboard'>{user?.name || 'Username'}</Link>
+                ) : (
+                  <Link
+                    className="px-5 py-1.5 text-sm border border-zinc-800 hover:bg-zinc-800 bg-transparent hidden items-center gap-2 rounded-md md:flex"
+                    to="/signup"
+                  >
+                    Get Started
+                    <FaArrowRight />
+                  </Link>
+                )
+              }
             </li>
           </div>
 
