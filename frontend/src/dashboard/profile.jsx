@@ -1,10 +1,13 @@
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { useAuth } from '../context/AuthContext'
 
-const useProfile = () => {
+/*const useProfile = () => {
   const [user, setUser] = useState()
   const [isLoading, setIsLoading] = useState(false)
   const navigate = useNavigate()
+
+  const { usr, isAuthenticated } = useAuth()
 
   useEffect(() => {
     const fetchUserData = async () => {
@@ -40,31 +43,15 @@ const useProfile = () => {
 
   return { user, isLoading }
 }
+*/
 
 export const Profile = () => {
 
-  const { user, isLoading } = useProfile()
-
   return (
     <section className="max-w-screen-xl m-auto border h-100">
-      <div>
-        <div>
-          <h2>Profile page</h2>
-        </div>
-        <div>
-          {isLoading && <p>Loading...</p>}
-          {user && (
-            <div>
-              <p>Name: {user.name}</p>
-              <p>Email: {user.email}</p>
-              <p>Shortened: <span className='font-semibold'>/{user.shortened_url}</span></p>
-              <p>Original URL: <span className='font-semibold'>{user.original_url}</span></p>
-            </div>
-          )}
-        </div>
-      </div>
 
-      <div>
+
+      <div className='border-l border-r max-h-screen-sm max-w-screen-sm'>
         <div>
           <div>
             <h2></h2>

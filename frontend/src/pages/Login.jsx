@@ -50,7 +50,6 @@ const useLogin = () => {
 
 export const Login = () => {
   const [showPassword, setShowPassword] = useState(false)
-  // Custom hook
   const { login, errorMessage, isLoading } = useLogin()
 
   return (
