@@ -1,6 +1,6 @@
 export const Button = ({ 
     children, 
-    variant = 'primary', 
+    variant = 'secondary', 
     size = 'md' }) => {
 
   // Base styles
@@ -9,7 +9,7 @@ export const Button = ({
   // Variant styles
   const variants = {
     primary: 'bg-green-700',
-    secondary: 'bg-blue-700 hover:bg-blue-800',
+    secondary: 'bg-blue-400',
     danger: 'bg-red-700',
     outlined: 'outline outline-pink-700'
   }
