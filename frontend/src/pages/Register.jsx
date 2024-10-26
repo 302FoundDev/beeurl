@@ -57,7 +57,7 @@ export const Register = () => {
   const [showPassword, setShowPassword] = useState(false)
 
   return (
-    <section className='min-h-min flex items-center justify-center mt-24 px-4 sm:px-6 lg:px-8'>
+    <section className='min-h-min flex items-center justify-center px-4 sm:px-6 lg:px-8'>
       <div className='max-w-md w-full space-y-8'>
         <div>
           <h2 className='mt-2 text-center text-3xl font-extrabold '>
@@ -76,7 +76,8 @@ export const Register = () => {
             <div className='relative'>
               <label 
                 htmlFor="complete-name"
-                className='sr-only'>
+                className='sr-only'
+              >
                 Complete name
               </label>
               <input
@@ -85,7 +86,7 @@ export const Register = () => {
                 id='Complete-name'
                 autoComplete='name'
                 required
-                className='appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-700 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm'
+                className='appearance-none rounded-md relative block w-full px-3 py-3 border border-gray-700 focus:outline-none focus:ring-blue-400 focus:border-blue-400 focus:z-10 sm:text-sm'
                 placeholder='Complete name'
               />
             </div>
@@ -93,7 +94,8 @@ export const Register = () => {
             <div className='relative'>
               <label 
                 htmlFor="email-address"
-                className='sr-only'>
+                className='sr-only'
+              >
                 Email address
               </label>
               <input
@@ -102,7 +104,7 @@ export const Register = () => {
                 id='email-address'
                 autoComplete='email'
                 required
-                className='appearance-none relative block w-full px-3 py-2 border border-gray-700 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm'
+                className='appearance-none rounded-md relative block w-full px-3 py-3 border border-gray-700 focus:outline-none focus:ring-blue-400 focus:border-blue-400 focus:z-10 sm:text-sm'
                 placeholder='Email address'
               />
             </div>
@@ -110,7 +112,8 @@ export const Register = () => {
             <div className='relative'>
               <label 
                 htmlFor="password" 
-                className='sr-only'>
+                className='sr-only'
+              >
                 Password
               </label>
               <input
@@ -119,7 +122,7 @@ export const Register = () => {
                 id='password'
                 autoComplete='current-password'
                 required
-                className='appearance-none relative block w-full px-3 py-2 border border-gray-700 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm'
+                className='appearance-none rounded-md relative block w-full px-3 py-3 border border-gray-700 focus:outline-none focus:ring-blue-400 focus:border-blue-400 focus:z-10 sm:text-sm'
                 placeholder='Password'
               />
               <button
@@ -142,7 +145,8 @@ export const Register = () => {
             <div className='relative'>
               <label 
                 htmlFor="confirmPassword"
-                className='sr-only'>
+                className='sr-only'
+              >
                 Confirm password
               </label>
               <input
@@ -151,7 +155,7 @@ export const Register = () => {
                 id='confirmPassword'
                 autoComplete='current-password'
                 required
-                className='appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-700 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm'
+                className='appearance-none rounded-md relative block w-full px-3 py-3 border border-gray-700 focus:outline-none focus:ring-blue-400 focus:border-blue-400 focus:z-10 sm:text-sm'
                 placeholder='Confirm pasword'
               />
               <button
@@ -179,7 +183,7 @@ export const Register = () => {
                   type="checkbox"
                   id='remember-me'
                   name='remember-me'
-                  className='h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded'
+                  className='h-4 w-4 text-indigo-600 focus:ring-blue-400 border-gray-300 rounded'
                 />
                 <label 
                   htmlFor="remember-me"
@@ -202,7 +206,7 @@ export const Register = () => {
           <div>
             <Button 
               variant='secondary' 
-              size='md'
+              size='lg'
             >
               {isLoading ? 'Signing up...' : 'Sign up'}
             </Button>
