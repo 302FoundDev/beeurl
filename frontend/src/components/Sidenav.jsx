@@ -1,6 +1,5 @@
 import { RiLinksFill } from 'react-icons/ri'
 import { IoHomeSharp, IoSettingsOutline } from 'react-icons/io5'
-import { IoMdSearch } from 'react-icons/io'
 import { Link } from 'react-router-dom'
 import { Button } from '../components/ui/Button'
 
