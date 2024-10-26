@@ -11,8 +11,8 @@ export const Navbar = () => {
   const { user, isAuthenticated } = useAuth()
 
   return (
-    <nav className="max-w-screen m-auto border-b-2 border-zinc-800 bg-zinc-900">
-      <div className="max-w-screen-xl m-auto h-16">
+    <header className="border-b-2 border-zinc-800 bg-zinc-900">
+      <nav className="max-w-screen-2xl px-8 m-auto h-16">
         <ul className="flex items-center justify-between w-full h-full gap-4">
           <li>
             <Link
@@ -65,7 +65,7 @@ export const Navbar = () => {
           </div>
 
         </ul>
-      </div>
-    </nav>
+      </nav>
+    </header>
   )
 }

@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
+import { Link } from 'react-router-dom'
 
 /*const useProfile = () => {
   const [user, setUser] = useState()
@@ -48,18 +49,16 @@ import { useAuth } from '../context/AuthContext'
 export const Profile = () => {
 
   return (
-    <section className="max-w-screen-xl m-auto border h-100">
-
-
-      <div className='border-l border-r max-h-screen-sm max-w-screen-sm'>
-        <div>
-          <div>
-            <h2></h2>
-            <h2></h2>
-          </div>
+    <section className="max-w-screen min-h-full flex bg-gray-100">
+      <div className="border-2 border-gray-300 rounded-lg shadow-lg bg-gray-200 p-6">
+        <div className="text-center mb-4">
+          <h2 className="text-2xl font-semibold text-gray-800">Nombre </h2>
+          <h2 className="text-lg text-gray-600">correo@ejemplo.com</h2>
+        </div>
+        <div className="mt-4">
+          {/* Puedes agregar más contenido aquí, como una lista de URLs o botones */}
         </div>
       </div>
-
     </section>
   )
 }

@@ -2,9 +2,9 @@ import { FaSquareXTwitter, FaLink } from "react-icons/fa6"
 
 export const Footer = () => {
   return (
-    <footer className="max-w-screen-xl m-auto flex justify-between absolute bottom-0 right-0 left-0 pb-4 opacity-60">
+    <footer className="max-w-screen px-8 flex justify-between py-6 opacity-75 border-t-2 border-zinc-800 bg-zinc-900">
       <div>
-        Made with <span className="text-red-600">:love</span> by 302FoundDev
+        Made with <span className="text-red-600">:love</span> by <a className="hover:underline hover:opacity-85" href="https://github.com/302founddev">302FoundDev</a>
       </div>
       <div>
         <a 
