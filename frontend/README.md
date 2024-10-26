@@ -1,2 +1,0 @@
-BEEURL -- an URL shortener
-
