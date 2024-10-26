@@ -1,8 +1,8 @@
 {
-  "editor.fontSize": 14,
+  "editor.fontSize": 13,
   "editor.tabSize": 2,
   "editor.cursorBlinking": "expand",
-  "editor.fontFamily": "'JetBrains Mono', Consolas, 'Courier New', monospace",
+  "editor.fontFamily": "\"'Monaspace Neon', monospace\"",
   "editor.fontVariations": true,
   "editor.minimap.enabled": false
 }
